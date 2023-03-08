@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProdukModel;
 use Illuminate\Http\Request;
-use App\Models\TransaksiModel;
-use Illuminate\Routing\Controller;
-use Illuminate\Foundation\Auth\User;
+use App\Models\User;
 
-class DashboardController extends Controller
+class KaryawanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +14,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $produk = ProdukModel::count();
-        $transaksi = TransaksiModel::count();
-        $karyawan = User::count();
-        return view('dashboard.index',compact('produk','transaksi','karyawan'), [
-            'active' => 'dashboard',
+        return view('karyawan.index', [
+            'active' => 'karyawan',
+            'users' => User::all()
         ]);
     }
 
@@ -88,6 +83,8 @@ class DashboardController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::destroy($id);
+
+        return redirect('/karyawan')->with('danger', 'Karyawan berhasil di Hapus');
     }
 }

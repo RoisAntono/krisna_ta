@@ -26,6 +26,8 @@
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!--     Notifikasi     -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <!-- Nucleo Icons -->
   <link href="{{asset("css/nucleo-icons.css")}}" rel="stylesheet" />
   <link href="{{asset("css/nucleo-svg.css")}}" rel="stylesheet" />
@@ -37,6 +39,7 @@
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
+
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
     <!-- Sidebar -->
     
@@ -46,7 +49,7 @@
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
     <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
+    <nav class="navbar navbar-main navbar-expand-lg px-0 shadow-none" id="navbarBlur" navbar-scroll="true">
 
         @include('layouts.header')
 
@@ -54,25 +57,56 @@
     <!-- End Navbar -->
     
     <div class="container-fluid py-4">
-      @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-          <span class="alert-text"><strong>Berhasil!</strong> {{ session('success') }}</span>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      @elseif (session('info'))
-      <div class="alert alert-info alert-dismissible fade show" role="alert">
-        <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-        <span class="alert-text"><strong>Berhasil!</strong> {{ session('info') }}</span>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      @endif
       @yield('content')
     </div>
+
+    <!-- Notifikasi -->
+  <div class="toast-container position-fixed top-0 end-0 p-3">
+    <div aria-live="polite" aria-atomic="true" class="position-relative">
+      <div class="toast-container top-0 end-0 p-3">
+        
+        @if (session('success'))
+
+        <!-- Then put toasts within -->
+        <div class="toast align-items-center text-bg-primary border-0 alert-success" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="d-flex">
+            <div class="toast-body">
+              <strong>{{ session('success') }}</strong>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+        </div>
+
+        @elseif (session('info'))
+
+        <!-- Then put toasts within -->
+        <div class="toast align-items-center text-bg-primary border-0 alert-info" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="d-flex">
+            <div class="toast-body">
+              <strong>{{ session('info') }}</strong>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+        </div>
+
+        @elseif (session('danger'))
+
+        <!-- Then put toasts within -->
+        <div class="toast align-items-center text-bg-primary border-0 alert-danger" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="d-flex">
+            <div class="toast-body">
+              <strong>{{ session('danger') }}</strong>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+        </div>
+
+        @endif
+
+      </div>
+    </div>
+  </div>
+  <!-- Notifikasi End -->
 
   </main>
   <!--   Core JS Files   -->
@@ -264,6 +298,15 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{asset("js/soft-ui-dashboard.min.js?v=1.0.3")}}"></script>
+  <!-- Notifikasi -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $('.toast').toast('show');
+    });
+  </script> 
+  
 </body>
-
 </html>

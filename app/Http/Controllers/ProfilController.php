@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\ProdukModel;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
-class ProdukController extends Controller
+class ProfilController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +18,7 @@ class ProdukController extends Controller
      */
     public function index()
     {
-        return view('produk.index', [
-            'active' => 'produk',
-            'produks' => ProdukModel::latest()->paginate(3)
-        ]);
+        //
     }
 
     /**
@@ -28,10 +28,7 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        return view('produk.create', [
-            'active' => 'produk',
-            'produks' => ProdukModel::all()
-        ]);
+        //
     }
 
     /**
@@ -42,22 +39,7 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'nama' => 'required|max:255',
-            'kategori' => 'required|max:255',
-            'deskripsi' => 'required|max:255',
-            'harga' => 'required|max:255',
-            'image' => 'image|file|max:1024',
-            
-        ]);
-
-        if($request->file('image')) {
-            $validatedData['image'] = $request->file('image')->store('produk-images');
-        }
-        
-        ProdukModel::create($validatedData);
-
-        return redirect('/produk')->with('success', 'Produk berhasil ditambahkan');
+        //
     }
 
     /**
@@ -74,14 +56,14 @@ class ProdukController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $profil
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProdukModel $produk)
+    public function edit(User $profil)
     {
-        return view('produk.edit', [
-            'active' => 'produk',
-            'produk' => $produk,
+        return view('Profil.index', [
+            'active' => '',
+            'profil' => $profil,
         ]);
     }
 
@@ -92,13 +74,14 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,ProdukModel $produk)
+    public function update(Request $request, User $profil)
     {
         $rules = [
-            'nama' => 'required|max:255',
-            'kategori' => 'required|max:255',
-            'deskripsi' => 'required|max:255',
-            'harga' => 'required|max:255',
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'alamat' => 'required|max:255',
+            'email' => 'required|max:255',
+            'telepon' => 'required|max:255',
             'image' => 'image|file|max:1024',
         ];
 
@@ -108,13 +91,29 @@ class ProdukController extends Controller
             if($request->oldImage) {
                 Storage::delete($request->oldImage);
             }
-            $validatedData['image'] = $request->file('image')->store('produk-images');
+            $validatedData['image'] = $request->file('image')->store('profil-images');
         }
         
-        ProdukModel::where('id', $produk->id)
+        User::where('id', $profil->id)
             ->update($validatedData);
 
-        return redirect('/produk')->with('info', 'Produk berhasil diedit');
+        return redirect()->back()->with('info', 'Profil berhasil diperbarui');
+    }
+
+    public function proses_password(Request $request, User $profil)
+    {
+        $rules = [
+            'password' => 'required|min:5|max:255',
+        ];
+
+        $validatedData = $request->validate($rules);
+        
+        $validatedData['password'] = Hash::make($request->password);
+        
+        User::where('id', $profil->id)
+            ->update($validatedData);
+
+        return redirect()->back()->with('success', 'Password berhasil diubah');
     }
 
     /**
@@ -125,8 +124,6 @@ class ProdukController extends Controller
      */
     public function destroy($id)
     {
-        ProdukModel::destroy($id);
-
-        return redirect('/produk')->with('danger', 'Produk berhasil di Hapus');
+        //
     }
 }

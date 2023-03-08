@@ -17,6 +17,22 @@
             <form action="/produk/{{ $produk->id }}" method="POST" enctype="multipart/form-data">
                 @method('put')
                 @csrf
+                <div class="form-group mb-3">
+                    <div class="col-sm-12 col-md-7">
+                        @if ($produk->image)
+                            <img src="{{ asset('storage/' . $produk->image) }}" class="img-preview img-fluid  col-sm-5 d-block">
+                        @else
+                            <img src="{{ asset('img/produk/nothing.jpg') }}" class="img-preview img-fluid  col-sm-5">
+                        @endif
+                        <div class="form-group">
+                            <label>Foto Produk</label>
+                            <div class="mb-3">
+                                <input type="hidden" name="oldImage" value="{{ $produk->image }}" >
+                                <input name="image" type="file" class="form-control" id="image" onchange="previewImage()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label>Nama Produk</label>
                     <div class="mb-3">
@@ -34,22 +50,10 @@
                         </select>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label>Stock</label>
-                            <div class="mb-3">
-                                <input type="text" name="stock" class="form-control" value="{{ old('stock', $produk->stock ) }}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label>Harga</label>
-                            <div class="mb-3">
-                                <input type="text" name="harga" class="form-control" value="{{ old('harga', $produk->harga ) }}">
-                            </div>
-                        </div>
+                <div class="form-group">
+                    <label>Harga</label>
+                    <div class="mb-3">
+                        <input type="text" name="harga" class="form-control" value="{{ old('harga', $produk->harga ) }}">
                     </div>
                 </div>
                 <div class="form-group">

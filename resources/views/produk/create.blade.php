@@ -17,6 +17,12 @@
             <form action="/produk" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
+                    <label>Foto Produk</label>
+                    <div class="mb-3">
+                        <input class="form-control" name="image" type="file" id="image" onchange="previewImage()">
+                    </div>
+                </div>
+                <div class="form-group">
                     <label>Nama Produk</label>
                     <div class="mb-3">
                         <input type="text" name="nama" class="form-control">
@@ -32,22 +38,10 @@
                           </select>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label>Stock</label>
-                            <div class="mb-3">
-                                <input type="text" name="stock" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label>Harga</label>
-                            <div class="mb-3">
-                                <input type="text" name="harga" class="form-control">
-                            </div>
-                        </div>
+                <div class="form-group">
+                    <label>Harga</label>
+                    <div class="mb-3">
+                        <input type="number" name="harga" class="form-control">
                     </div>
                 </div>
                 <div class="form-group">

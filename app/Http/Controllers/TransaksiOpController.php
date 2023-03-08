@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ProdukModel;
 use Illuminate\Http\Request;
 use App\Models\TransaksiModel;
-use Illuminate\Routing\Controller;
-use Illuminate\Foundation\Auth\User;
 
-class DashboardController extends Controller
+class TransaksiOpController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +15,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $produk = ProdukModel::count();
-        $transaksi = TransaksiModel::count();
-        $karyawan = User::count();
-        return view('dashboard.index',compact('produk','transaksi','karyawan'), [
-            'active' => 'dashboard',
+        return view('Transaksi_Op.index', [
+            'active' => 'transaksiop',
+            'transaksis' => TransaksiModel::latest()->get(),
         ]);
     }
 
@@ -32,7 +28,10 @@ class DashboardController extends Controller
      */
     public function create()
     {
-        //
+        return view('Transaksi_Op.create', [
+            'active' => 'transaksiop',
+            'produks' => ProdukModel::all()
+        ]);
     }
 
     /**
@@ -43,7 +42,15 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'pembeli' => 'required|max:255',
+            'produk_id' => 'required',
+            
+        ]);
+
+        TransaksiModel::create($validatedData);
+
+        return redirect('/transaksiop')->with('success', 'Produk berhasil ditambahkan');
     }
 
     /**
