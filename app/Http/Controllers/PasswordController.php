@@ -7,9 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
-class ProfilController extends Controller
+class PasswordController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -56,14 +55,14 @@ class ProfilController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $profil
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $profil)
+    public function edit(User $password)
     {
-        return view('Profil.index', [
+        return view('Profil.password', [
             'active' => '',
-            'profil' => $profil,
+            'password' => $password,
         ]);
     }
 
@@ -74,30 +73,20 @@ class ProfilController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $profil)
+    public function update(Request $request,User $password)
     {
         $rules = [
-            'first_name' => 'required|max:255',
-            'last_name' => 'required|max:255',
-            'alamat' => 'required|max:255',
-            'email' => 'required|max:255',
-            'telepon' => 'required|max:255',
-            'image' => 'image|file|max:1024',
+            'password' => 'required|min:5|max:255',
         ];
 
         $validatedData = $request->validate($rules);
-
-        if($request->file('image')) {
-            if($request->oldImage) {
-                Storage::delete($request->oldImage);
-            }
-            $validatedData['image'] = $request->file('image')->store('profil-images');
-        }
         
-        User::where('id', $profil->id)
+        $validatedData['password'] = Hash::make($request->password);
+        
+        User::where('id', $password->id)
             ->update($validatedData);
 
-        return redirect()->back()->with('info', 'Profil berhasil diperbarui');
+        return redirect()->back()->with('success', 'Password berhasil diubah');
     }
 
     /**

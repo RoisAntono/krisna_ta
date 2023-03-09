@@ -103,6 +103,7 @@ class ProdukController extends Controller
         ];
 
         $validatedData = $request->validate($rules);
+        //$decrypted_id = decrypt($produk);
 
         if($request->file('image')) {
             if($request->oldImage) {

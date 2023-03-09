@@ -39,6 +39,8 @@
                 </ul>
             </div>
             <div class="card-body mx-auto">
+                <!-- Encrypt ID
+                <a href="/produk/{{ encrypt($produk->id) }}/edit">--> 
                 <a href="/produk/{{ $produk->id }}/edit">
                     <button class="btn btn-primary" type="button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">

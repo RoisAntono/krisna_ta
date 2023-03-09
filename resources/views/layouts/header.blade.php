@@ -31,7 +31,18 @@
                   <a class="dropdown-item" href="/profil/{{ auth()->user()->id }}/edit">Akun Saya</a>
                 </li>
                 @else
+                <li>
                   <a class="dropdown-item" href="/profil/{{ auth()->user()->id }}/edit">Akun Saya</a>
+                </li>
+                @endif
+                @if(Auth()->user()->level_admin)
+                <li>
+                  <a class="dropdown-item" href="/password/{{ auth()->user()->id }}/edit">Ubah Password</a>
+                </li>
+                @else
+                <li>
+                  <a class="dropdown-item" href="/password/{{ auth()->user()->id }}/edit">Ubah Password</a>
+                </li>
                 @endif
                 <hr>
                 <li>

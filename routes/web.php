@@ -2,12 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProfilController;
-use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TransaksiController;
-use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\TransaksiOpController;
 
 /*
@@ -32,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::resource('/profil', ProfilController::class);
-    Route::put('/password/{id}', [ProfilController::class, 'proses_password']);
+    Route::resource('/password', PasswordController::class);
 
     Route::resource('/produk', ProdukController::class);
     Route::get('/produkdelete/{id}', [ProdukController::class, 'destroy'])->name('destroy');
