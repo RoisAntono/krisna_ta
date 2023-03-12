@@ -17,21 +17,49 @@
             <form action="/produk/{{ $produk->id }}" method="POST" enctype="multipart/form-data">
                 @method('put')
                 @csrf
-                <div class="form-group mb-3">
-                    <div class="col-sm-12 col-md-7">
+                <div class="row">
+                    <div class="col-4">
                         @if ($produk->image)
-                            <img src="{{ asset('storage/' . $produk->image) }}" class="img-preview img-fluid  col-sm-5 d-block">
+                            <img src="{{ asset('storage/' . $produk->image) }}" class="img-preview img-fluid height-300 d-block">
                         @else
-                            <img src="{{ asset('img/produk/nothing.jpg') }}" class="img-preview img-fluid  col-sm-5">
+                            <img src="{{ asset('img/produk/nothing.jpg') }}" class="img-preview img-fluid height-300 col-sm-5">
                         @endif
-                        <div class="form-group">
+                    </div>
+                    <div class="col-4">
+                        @if ($produk->image1)
+                            <img src="{{ asset('storage/' . $produk->image1) }}" class="img-preview img-fluid height-300 d-block">
+                        @else
+                            <img src="{{ asset('img/produk/nothing.jpg') }}" class="img-preview img-fluid height-300 col-sm-5">
+                        @endif
+                    </div>
+                    <div class="col-4">
+                        @if ($produk->image2)
+                            <img src="{{ asset('storage/' . $produk->image2) }}" class="img-preview img-fluid height-300 d-block">
+                        @else
+                            <img src="{{ asset('img/produk/nothing.jpg') }}" class="img-preview img-fluid height-300 col-sm-5">
+                        @endif
+                    </div>
+                </div>
+                <div class="form-group">
                             <label>Foto Produk</label>
                             <div class="mb-3">
                                 <input type="hidden" name="oldImage" value="{{ $produk->image }}" >
                                 <input name="image" type="file" class="form-control" id="image" onchange="previewImage()">
                             </div>
-                        </div>
-                    </div>
+                </div>
+                <div class="form-group">
+                            <label>Foto Produk</label>
+                            <div class="mb-3">
+                                <input type="hidden" name="oldImage" value="{{ $produk->image1 }}" >
+                                <input name="image" type="file" class="form-control" id="image" onchange="previewImage()">
+                            </div>
+                </div>
+                <div class="form-group">
+                            <label>Foto Produk</label>
+                            <div class="mb-3">
+                                <input type="hidden" name="oldImage" value="{{ $produk->image2 }}" >
+                                <input name="image" type="file" class="form-control" id="image" onchange="previewImage()">
+                            </div>
                 </div>
                 <div class="form-group">
                     <label>Nama Produk</label>

@@ -48,11 +48,19 @@ class ProdukController extends Controller
             'deskripsi' => 'required|max:255',
             'harga' => 'required|max:255',
             'image' => 'image|file|max:1024',
+            'image1' => 'image|file|max:1024',
+            'image2' => 'image|file|max:1024',
             
         ]);
 
         if($request->file('image')) {
             $validatedData['image'] = $request->file('image')->store('produk-images');
+        }
+        if($request->file('image1')) {
+            $validatedData['image1'] = $request->file('image1')->store('produk-images');
+        }
+        if($request->file('image2')) {
+            $validatedData['image2'] = $request->file('image2')->store('produk-images');
         }
         
         ProdukModel::create($validatedData);

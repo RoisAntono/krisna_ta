@@ -24,11 +24,44 @@
     @foreach($produks as $produk) 
     <div class="col-sm-4 mb-3">
         <div class="card" style="width: 18rem;">
-            @if ($produk->image)
-              <img src="{{asset('storage/'.$produk->image)}}" class="card-img-top" alt="...">
-            @else
-              <img src="{{asset("img/produk/nothing.jpg")}}" class="card-img-top" alt="...">
-            @endif
+            <div id="carouselExampleIndicators{{ $produk->id}}" class="carousel slide carousel-fade">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators{{ $produk->id}}" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators{{ $produk->id}}" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators{{ $produk->id}}" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  @if ($produk->image)
+                    <img src="{{asset('storage/'.$produk->image)}}" class="card-img-top height-300" alt="...">
+                  @else
+                    <img src="{{asset("img/produk/nothing.jpg")}}" class="card-img-top height-300" alt="...">
+                  @endif
+                </div>
+                <div class="carousel-item">
+                  @if ($produk->image1)
+                    <img src="{{asset('storage/'.$produk->image1)}}" class="card-img-top height-300" alt="...">
+                  @else
+                    <img src="{{asset("img/produk/nothing.jpg")}}" class="card-img-top height-300" alt="...">
+                  @endif
+                </div>
+                <div class="carousel-item">
+                  @if ($produk->image2)
+                    <img src="{{asset('storage/'.$produk->image2)}}" class="card-img-top height-300" alt="...">
+                  @else
+                    <img src="{{asset("img/produk/nothing.jpg")}}" class="card-img-top height-300" alt="...">
+                  @endif
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators{{ $produk->id}}" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators{{ $produk->id}}" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
             <div class="card-body">
               <h5 class="card-title">{{ $produk->nama }} <span style="font-size: 10px" class="badge bg-secondary">{{ $produk->kategori}}</span></h5>
               <p class="card-text">{{ $produk->deskripsi }}</p>

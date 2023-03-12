@@ -17,9 +17,21 @@
             <form action="/produk" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label>Foto Produk</label>
+                    <label>Foto Produk 1</label>
                     <div class="mb-3">
                         <input class="form-control" name="image" type="file" id="image" onchange="previewImage()">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Foto Produk 2</label>
+                    <div class="mb-3">
+                        <input class="form-control" name="image1" type="file" id="image1" onchange="previewImage()">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Foto Produk 3</label>
+                    <div class="mb-3">
+                        <input class="form-control" name="image2" type="file" id="image2" onchange="previewImage()">
                     </div>
                 </div>
                 <div class="form-group">

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->text('deskripsi');
             $table->string('harga');
             $table->string('image')->nullable();
+            $table->string('image1')->nullable();
+            $table->string('image2')->nullable();
             $table->timestamps();
         });
     }
