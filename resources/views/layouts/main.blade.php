@@ -56,9 +56,11 @@
     </nav>
     <!-- End Navbar -->
     
+    <!-- Content -->
     <div class="container-fluid py-4">
       @yield('content')
     </div>
+    <!-- End Content -->
 
     <!-- Notifikasi -->
   <div class="toast-container position-fixed top-0 end-0 p-3">
