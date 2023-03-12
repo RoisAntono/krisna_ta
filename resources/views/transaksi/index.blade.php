@@ -39,9 +39,17 @@
                 <tr>
                   <th class="ps-4">{{ $loop->iteration }}</th>
                   <td class="ps-4">{{ $transaksi->pembeli }}</td>
+                  @if ($transaksi->produk)
                   <td class="ps-4">{{ $transaksi->produk->nama }}</td>
+                  @else
+                  <td class="ps-4">Produk Tidak Ditemukan</td>
+                  @endif
                   <td class="ps-4">{{ $transaksi->created_at }}</td>
+                  @if ($transaksi->produk)
                   <td class="ps-4">Rp. {{ number_format($transaksi->produk->harga) }}</td>
+                  @else
+                  <td class="ps-4">Rp. 0</td>
+                  @endif
                   <td class="ps-4">
                       <a href="#">
                           <button type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">

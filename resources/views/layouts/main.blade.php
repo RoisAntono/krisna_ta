@@ -36,8 +36,6 @@
   <link href="{{asset("css/nucleo-svg.css")}}" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="{{asset("css/soft-ui-dashboard.css?v=1.0.3")}}" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -113,7 +111,7 @@
   <!-- Notifikasi End -->
 
   </main>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
   <!--   Core JS Files   -->
   <script src="{{asset("js/core/popper.min.js")}}"></script>
   <script src="{{asset("js/core/bootstrap.min.js")}}"></script>
@@ -312,6 +310,13 @@
       $('.toast').toast('show');
     });
   </script> 
-  
+
+  <!-- Pagination -->
+  <script>
+    $(() => {
+      console.log($('nav[role="navigation"] .flex.justify-between'));
+      $('nav[role="navigation"] .flex.justify-between').first().remove()
+    });
+  </script>
 </body>
 </html>
