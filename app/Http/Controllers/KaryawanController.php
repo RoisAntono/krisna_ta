@@ -85,6 +85,6 @@ class KaryawanController extends Controller
     {
         User::destroy($id);
 
-        return redirect('/karyawan')->with('danger', 'Karyawan berhasil di Hapus');
+        return redirect('/karyawan')->with('danger', 'Akun Karyawan berhasil di Hapus');
     }
 }
